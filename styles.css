@@ -1,0 +1,74 @@
+
+:root{
+  --bg:#0a0e33;
+  --accent:#5502d0;
+  --red:#e62b1e;
+  --card:#0f123b;
+  --text:#ffffff;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter, "Segoe UI", Roboto, Arial, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+}
+
+.container{
+  width:100%;
+  max-width:720px;
+}
+
+.site-header{ text-align:center; margin-bottom:18px }
+.logo{ max-width:220px; display:block; margin:0 auto 14px }
+.site-header h1{ margin:0; font-size:1.35rem; letter-spacing:0.5px }
+.tagline{ margin:8px 0 0; color: #cfc8ff; opacity:0.95 }
+
+.form-card{
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));
+  border:1px solid rgba(255,255,255,0.04);
+  padding:20px;
+  border-radius:12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+}
+
+label{ display:block; margin-bottom:12px; font-size:0.95rem }
+label input[type="text"],
+label input[type="email"],
+label input[type="tel"]{
+  display:block;
+  width:100%;
+  padding:10px 12px;
+  margin-top:6px;
+  border-radius:8px;
+  background:#090b2a;
+  border:1px solid rgba(255,255,255,0.04);
+  color:var(--text);
+  outline:none;
+}
+
+.checkbox{ display:flex; gap:10px; align-items:center }
+.checkbox input{ width:16px; height:16px }
+
+.submit-btn{
+  margin-top:10px;
+  background:var(--red);
+  color:#fff;
+  border:none;
+  padding:12px 18px;
+  border-radius:8px;
+  font-weight:600;
+  cursor:pointer;
+  width:100%;
+  font-size:1rem;
+}
+
+.site-footer{ text-align:center; margin-top:12px; color:rgba(255,255,255,0.5) }

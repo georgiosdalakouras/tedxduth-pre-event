@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>TEDxDUTH Pre-Event Registration</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="site-header">
+      <img src="logo.png" alt="TEDxDUTH" class="logo" />
+      <h1>TEDxDUTH Pre-Event – AXD 08/11/2025</h1>
+      <p class="tagline">Entroπia is calling</p>
+    </header>
+
+    <section class="form-card">
+      <form id="regForm" name="registration" method="POST" data-netlify="true" netlify-honeypot="bot-field" >
+        <input type="hidden" name="form-name" value="registration" />
+        <p style="display:none">
+          <label>Μηχάνημα: <input name="bot-field" /></label>
+        </p>
+
+        <label>Ονοματεπώνυμο
+          <input type="text" name="name" required />
+        </label>
+
+        <label>E-mail επικοινωνίας
+          <input type="email" name="email" required />
+        </label>
+
+        <label>Κινητό τηλέφωνο
+          <input type="tel" name="phone" required />
+        </label>
+
+        <label class="checkbox">
+          <input type="checkbox" name="consent" value="agree" required />
+          <span>Συναινώ για τον διαμοιρασμό των ανωτέρω στοιχείων προς το TEDxDUTH για λόγους επικοινωνίας</span>
+        </label>
+
+        <label class="checkbox">
+          <input type="checkbox" name="newsletter" value="yes" />
+          <span>Επιθυμώ να εγγραφώ στo Newsletter</span>
+        </label>
+
+        <button type="submit" class="submit-btn">Υποβολή</button>
+      </form>
+    </section>
+
+    <footer class="site-footer">
+      <small>TEDxDUTH</small>
+    </footer>
+  </main>
+
+  <script>
+  const form = document.getElementById('regForm');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const payload = {};
+    data.forEach((v,k) => payload[k]=v);
+
+    // 1) Send to Netlify Forms (store submission)
+    const urlEncoded = new URLSearchParams();
+    for (const pair of data.entries()) { urlEncoded.append(pair[0], pair[1]); }
+    urlEncoded.append('form-name', 'registration');
+
+    try {
+      await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: urlEncoded.toString()
+      });
+
+      // 2) Call serverless function to send confirmation emails & QR
+      await fetch('/.netlify/functions/sendConfirmation', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      // 3) Redirect to success page
+      window.location.href = '/success.html';
+    } catch (err) {
+      console.error(err);
+      alert('Σφάλμα κατά την υποβολή. Προσπάθησε ξανά.');
+    }
+  });
+  </script>
+</body>
+</html>

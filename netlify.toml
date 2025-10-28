@@ -1,0 +1,9 @@
+[build]
+  publish = "public"
+  functions = "functions"
+
+[context.production.environment]
+  # Set these in Netlify site settings (Site settings → Build & deploy → Environment)
+  # SENDGRID_API_KEY = "..." 
+  # SENDER_EMAIL = "noreply@tedxduth.gr"
+  # ORGANIZER_EMAIL = "g.dalakouras@tedxduth.gr"
